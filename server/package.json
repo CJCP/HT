@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "tsc-watch --onSuccess \"node ./dist/index.js\""
+  },
   "devDependencies": {
+    "tsc-watch": "^1.0.31",
     "typescript": "^3.1.6"
   }
 }
