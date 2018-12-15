@@ -4,15 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsc-watch --onSuccess \"node ./index.js\""
+    "dev": "tsc-watch --onSuccess \"node ./dist/index.js\""
   },
   "devDependencies": {
+    "@types/node-fetch": "^2.1.4",
+    "@types/parse-torrent": "^5.8.2",
     "tsc-watch": "^1.0.31",
     "typescript": "^3.1.6"
   },
   "dependencies": {
-    "@types/node-fetch": "^2.1.4",
-    "@types/parse-torrent": "^5.8.2",
     "node-fetch": "^2.3.0",
     "parse-torrent": "^6.1.2"
   }
