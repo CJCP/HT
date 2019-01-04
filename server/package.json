@@ -18,8 +18,10 @@
     "typescript": "^3.1.6"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.119",
     "@types/sha1": "^1.1.1",
     "bencode": "^2.0.0",
+    "lodash": "^4.17.11",
     "node-fetch": "^2.3.0",
     "parse-torrent": "^6.1.2",
     "sha1": "^1.1.1"
