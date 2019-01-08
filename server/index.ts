@@ -1,8 +1,20 @@
 import { readFileSync } from "fs";
 import { resolve } from "path";
 import sha1 from "sha1";
+import { escape } from "./torrent-tools";
 import { decode , encode} from "bencode";
 import {pipe} from "lodash/fp";
+
+
+interface Sha1Options {
+  asBytes?: boolean;
+  asString?: boolean;
+}
+
+interface Metadata {
+  info: object;
+  'url-list'?: Array<Buffer>;
+}
 
 const root = resolve('.');
 
@@ -14,22 +26,23 @@ const root = resolve('.');
  */
 
 const torrentFile = readFileSync(root + '/torrent-files/pic.torrent');
-const metadata = decode(torrentFile);
+const metadata: Metadata = decode(torrentFile);
 
 if (!metadata) {
   // handle error
 }
 
-const {info, files} = metadata;
+const {info} = metadata;
+// const url_list = metadata['url-list'].toString().split(',');
 
-if (!info || !files) {
+if (!info) {
   // handle error
 }
 
-const info_hash = pipe([encode, sha1, escape])(info);
+console.log(metadata);
 
-function escape(l: string) {
-  console.log(l)
-  return l;
-}
+const sha = (options: Sha1Options) => (msg: Buffer) => sha1(msg, options);
 
+const info_hash: string = pipe([encode, sha({})])(info);
+
+console.log('INFO_HASH : ', info_hash);
