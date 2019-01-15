@@ -31,3 +31,32 @@ export function escape(l: Buffer): string {
         }
     }, '');
 }
+
+
+/**
+ * udp://tracker.coppersurfer.tk:6969
+ * udp://tracker.opentrackr.org:1337/announce
+ */
+
+const DOMAIN_NAME = 2;
+const PORT = 3;
+const PATH = 4
+
+interface TrackerInformations {
+    address: string,
+    port: string,
+    path?: string 
+}
+
+export function parseUDPTracker(endpoint: string): TrackerInformations | null {
+    const captured = endpoint.match(/(udp:\/\/)(.*):([0-9]*)(\/.*){0,1}/);
+    // PORT AND DOMAIN_NAME ARE MANDATORY
+    if (!captured || captured.length < 3) {
+        return null;
+    }
+    return {
+        address: captured[DOMAIN_NAME],
+        port: captured[PORT],
+        path: captured[PATH]
+    };
+}
